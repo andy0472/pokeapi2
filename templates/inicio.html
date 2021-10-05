@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Pokemon</title>
+</head>
+<body>
+<form method="POST">
+
+
+
+
+    <!-- INICIO DE LA TABLA-->
+    <table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">FOTO</th>
+      <th scope="col">NAME</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for pokemon in pokemons %}
+
+    <tr>
+      <th scope="row">{{pokemon.get_id()}}</th>
+      <td>
+           <a href="{{url_for('detallePokemon',id=pokemon.get_id())}}" >
+                <img src="{{pokemon.get_foto()}}" class="img-thumbnail" alt="{{pokemon.get_name()}}" >
+            </a>
+      </td>
+
+      <td>{{pokemon.get_name()}}</td>
+
+    </tr>
+  {% endfor %}
+
+  </tbody>
+</table>
+    <!-- INICIO DE LA TABLA-->
+
+
+</form>
+
+
+ <button type="submit" name="previous"  value="previous" style="display: none">Previous</button>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
+
+</body>
+</html>

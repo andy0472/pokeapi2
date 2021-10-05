@@ -1,0 +1,47 @@
+import requests
+from flask import Flask, request
+from flask import app, render_template
+from Pokemon import Pokemon
+import pandas as pd
+
+app = Flask(__name__)
+
+if __name__ == '__main__':
+    url = 'http://pokeapi.co/api/v2/pokemon-form/'
+
+
+def listaPokemones(url='http://pokeapi.co/api/v2/pokemon-form/', offset=0):
+    args = {'offset': offset} if offset else {}
+    response = requests.get(url, params=args)
+    results = []
+
+    if response.status_code == 200:
+        playload = response.json()
+        result = playload.get('results', [])  # que me devuelva resultados de lo contrario una lista vacia
+        results = nombreFoto(result)
+    return results
+
+def nombreFoto(pokemons):
+
+    for i in range(len(pokemons)):
+        urlPokemon = pokemons[i]['url']
+        response_json = (requests.get(urlPokemon)).json()
+        pokemons[i]['url']=response_json.get('sprites')['front_default']
+    return pokemons
+
+
+@app.route('/detallePokemon')
+def detallePokemon():
+    return 'fotoPokemon'
+
+@app.route('/', methods=['GET', 'POST'])
+def inicio():
+    pokemon = Pokemon()
+    pokemons = listaPokemones()
+    #pokemons = nombreFoto(defaultList)
+    if (request.method == 'POST'): #and (request.form['next']=='next'):
+        pokemons = listaPokemones(offset=pokemon.get_pokemon_next())
+
+
+    return render_template('inicio.html', pokemons=pokemons)
+

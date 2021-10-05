@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Detalle Pokemon</title>
+</head>
+<body>
+ <div class="text-center">
+        <img src="{{pokemon.get_foto()}}" class="rounded" alt="{{pokemon.get_name()}}" width="150" height="200">
+  <div>ID: {{pokemon.get_id()}}</div>
+ <div>Name: {{pokemon.get_name()}}</div>
+ <div>Ability: {{pokemon.get_ability()}}</div>
+ <div>Type: {{pokemon.get_type()}}</div>
+ <div>
+     Moves:
+     <ol>
+    {% for move in pokemon.get_moves()%}
+         <li>{{move}}</li>
+    {% endfor %}
+     </ol>
+
+ </div>
+ </div>
+
+
+
+
+    <br/>
+ <a href="{{url_for('inicio')}}"> <button type="button">Inicio</button></a>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
+</body>
+</html>
